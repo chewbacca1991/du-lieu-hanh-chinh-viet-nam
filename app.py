@@ -29,7 +29,10 @@ def get_data():
     # Logic to retrieve data from the database
     try:
         # Example data retrieval logic (to be implemented)
-        data = []  # Replace with actual database query and fetch operation
+        with conn.cursor() as cursor:
+            cursor.execute('SELECT * FROM your_table_name')  # Replace with actual query
+            data = cursor.fetchall()  # Fetch data
+
         return jsonify({'data': data}), 200
     except Exception as e:
         logging.error(f"Error retrieving data: {str(e)}")
