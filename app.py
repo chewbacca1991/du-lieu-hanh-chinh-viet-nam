@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# Thiết lập cơ sở dữ liệu PostgreSQL
+# Setup PostgreSQL database connection
 conn = psycopg2.connect(
     dbname=os.environ.get('DB_NAME'),
     user=os.environ.get('DB_USER'),
@@ -15,7 +15,7 @@ conn = psycopg2.connect(
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
-    # Logic để lấy dữ liệu từ cơ sở dữ liệu
+    # Logic to retrieve data from the database
     return jsonify({'message': 'API data retrieved successfully.'})
 
 if __name__ == '__main__':
