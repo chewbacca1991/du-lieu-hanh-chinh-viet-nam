@@ -20,6 +20,7 @@ try:
 except psycopg2.Error as e:
     logging.critical(f"Critical error connecting to the database: {e}")
     conn = None
+    exit(1)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
