@@ -5,13 +5,17 @@ import os
 app = Flask(__name__)
 
 # Setup PostgreSQL database connection
-conn = psycopg2.connect(
-    dbname=os.environ.get('DB_NAME'),
-    user=os.environ.get('DB_USER'),
-    password=os.environ.get('DB_PASSWORD'),
-    host=os.environ.get('DB_HOST', 'localhost'),
-    port=os.environ.get('DB_PORT', '5432')
-)
+try:
+    conn = psycopg2.connect(
+        dbname=os.environ.get('DB_NAME'),
+        user=os.environ.get('DB_USER'),
+        password=os.environ.get('DB_PASSWORD'),
+        host=os.environ.get('DB_HOST', 'localhost'),
+        port=os.environ.get('DB_PORT', '5432')
+    )
+except psycopg2.Error as e:
+    print(f"Error connecting to the database: {e}")
+    conn = None
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
