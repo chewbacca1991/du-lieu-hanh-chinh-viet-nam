@@ -19,7 +19,6 @@ try:
     )
 except psycopg2.Error as e:
     logging.critical(f"Critical error connecting to the database: {e}")
-    conn = None
     exit(1)
 
 @app.route('/api/data', methods=['GET'])
@@ -34,7 +33,7 @@ def get_data():
         return jsonify({'data': data}), 200
     except Exception as e:
         logging.error(f"Error retrieving data: {str(e)}")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'An error occurred while retrieving data.'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
