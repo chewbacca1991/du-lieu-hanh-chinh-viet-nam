@@ -19,6 +19,8 @@ except psycopg2.Error as e:
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
+    if conn is None:
+        return jsonify({'error': 'Database connection failed.'}), 500
     # Logic to retrieve data from the database
     return jsonify({'message': 'API data retrieved successfully.'})
 
