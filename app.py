@@ -18,7 +18,7 @@ try:
         port=os.environ.get('DB_PORT', '5432')
     )
 except psycopg2.Error as e:
-    logging.error(f"Error connecting to the database: {e}")
+    logging.critical(f"Critical error connecting to the database: {e}")
     conn = None
 
 @app.route('/api/data', methods=['GET'])
